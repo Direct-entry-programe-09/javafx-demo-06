@@ -46,7 +46,7 @@ public class TableFormController {
 
             }
         });
-        btnDeleteCustomer.setOnAction(new EventHandler<ActionEvent>() {
+/*        btnDeleteCustomer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 ObservableList<CustomerTM> olCustomer = tblCustomers.getItems();
@@ -56,18 +56,18 @@ public class TableFormController {
                         ButtonType.YES,ButtonType.NO).showAndWait();
                 if (selectedOption.get()==ButtonType.YES) olCustomer.remove(selectedItem);
             }
-        });
-        btnNewCustomer.setOnAction(new EventHandler<ActionEvent>() {
+        })*/;
+       /* btnNewCustomer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 tblCustomers.getSelectionModel().clearSelection();
                 txtId.requestFocus();
             }
-        });
+        });*/
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("customerId"));
         tblCustomers.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("customerName"));
         tblCustomers.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
-        btnSaveCustomer.setOnAction(new EventHandler<ActionEvent>() {
+/*        btnSaveCustomer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 ObservableList<CustomerTM> olCustomer = tblCustomers.getItems();
@@ -101,13 +101,65 @@ public class TableFormController {
                 CustomerTM newCustomer = new CustomerTM(id, Name, Address);
                 olCustomer.add(newCustomer);
                 txtAddress.clear();
-                ;
                 txtId.clear();
                 txtName.clear();
                 txtId.requestFocus();
             }
-        });
+        })*/;
 
+
+    }
+
+    public void btnSaveCustomer_OnAction(ActionEvent actionEvent) {
+        ObservableList<CustomerTM> olCustomer = tblCustomers.getItems();
+        String id = txtId.getText();
+        String Name = txtName.getText();
+        String Address = txtAddress.getText();
+        if (id.isBlank()) {
+            new Alert(Alert.AlertType.ERROR, "Customer id cannot be empty").showAndWait();
+            txtId.requestFocus();
+            return;
+        } else if (Name.isBlank()) {
+            new Alert(Alert.AlertType.ERROR, "Customer Name cannot be empty").showAndWait();
+            txtName.requestFocus();
+            return;
+
+        } else if (Address.isBlank()) {
+            new Alert(Alert.AlertType.ERROR, "Customer Address cannot be empty").showAndWait();
+            txtAddress.requestFocus();
+            return;
+
+        }
+        for (CustomerTM customer : olCustomer
+        ) {
+            if (customer.getCustomerId().equals(txtId.getText())) {
+                new Alert(Alert.AlertType.ERROR, "Customer Id already available").showAndWait();
+                txtId.requestFocus();
+                return;
+            }
+
+        }
+        CustomerTM newCustomer = new CustomerTM(id, Name, Address);
+        olCustomer.add(newCustomer);
+        txtAddress.clear();
+        txtId.clear();
+        txtName.clear();
+        txtId.requestFocus();
+
+    }
+
+    public void btnNewCustomer_OnAction(ActionEvent actionEvent) {
+        tblCustomers.getSelectionModel().clearSelection();
+        txtId.requestFocus();
+    }
+
+    public void btnDeleteCustomer_OnAction(ActionEvent actionEvent) {
+        ObservableList<CustomerTM> olCustomer = tblCustomers.getItems();
+        CustomerTM selectedItem = tblCustomers.getSelectionModel().getSelectedItem();
+        if (selectedItem==null) return;
+        Optional<ButtonType> selectedOption = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete",
+                ButtonType.YES,ButtonType.NO).showAndWait();
+        if (selectedOption.get()==ButtonType.YES) olCustomer.remove(selectedItem);
 
     }
 }

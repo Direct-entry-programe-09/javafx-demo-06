@@ -27,8 +27,8 @@
             <TextField fx:id="txtAddress" promptText="Ex: Panadura" />
          </children>
       </VBox>
-      <Button fx:id="btnSaveCustomer" layoutX="215.0" layoutY="85.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: blue; -fx-text-fill: white;" text="Save Customer" />
-      <Button fx:id="btnNewCustomer" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: #F026B8; -fx-text-fill: white;" text="New Customer +" />
-      <Button fx:id="btnDeleteCustomer" blendMode="COLOR_BURN" layoutX="215.0" layoutY="122.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-text-fill: white;" text="Delete Customer" />
+      <Button fx:id="btnSaveCustomer" layoutX="215.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnSaveCustomer_OnAction" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: blue; -fx-text-fill: white;" text="Save Customer" />
+      <Button fx:id="btnNewCustomer" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnNewCustomer_OnAction" style="-fx-background-color: #F026B8; -fx-text-fill: white;" text="New Customer +" />
+      <Button fx:id="btnDeleteCustomer" blendMode="COLOR_BURN" layoutX="215.0" layoutY="122.0" mnemonicParsing="false" onAction="#btnDeleteCustomer_OnAction" style="-fx-background-color: red; -fx-text-fill: white;" text="Delete Customer" />
    </children>
 </AnchorPane>
